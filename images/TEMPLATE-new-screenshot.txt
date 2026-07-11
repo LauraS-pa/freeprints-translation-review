@@ -1,0 +1,4 @@
+YOUR SCREEN TITLE HERE
+
+Short label: German text exactly as it appears on screen
+Another label: More German text from the screenshot

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreePrints Translation Review</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="header-inner">
+        <div>
+          <h1 class="app-title">FreePrints Translation Review</h1>
+          <p class="app-subtitle">
+            For Daniela · German translation feedback · Screenshot page review
+          </p>
+        </div>
+        <div class="header-actions">
+          <label class="toggle" id="owner-toggle-label">
+            <input type="checkbox" id="owner-mode-toggle" checked />
+            <span>Owner mode</span>
+          </label>
+          <button type="button" class="btn" id="export-btn">Export review</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <nav class="screenshot-nav" id="screenshot-nav" aria-label="Screenshots"></nav>
+      <div id="app"></div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" role="img" aria-label="FreePrints splash screen placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3f4f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="390" height="844" fill="url(#bg)"/>
+  <rect x="24" y="72" width="342" height="420" rx="12" fill="#e5e7eb"/>
+  <text x="195" y="560" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6b7280">Screenshot placeholder</text>
+  <text x="195" y="584" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#9ca3af">Drop 01-splash-landing.png in images/</text>
+  <text x="195" y="640" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#111827">IHR SCHÖNSTES LÄCHELN</text>
+  <text x="40" y="690" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#374151">
+    <tspan x="40" dy="0">Verewigen Sie Ihre Lieblingsfotos auf KOSTENLOSEN</tspan>
+    <tspan x="40" dy="18">10x15-Abzügen höchster Qualität …</tspan>
+  </text>
+  <text x="195" y="760" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#2563eb">Was erhalte ich GRATIS?</text>
+  <rect x="95" y="790" width="200" height="44" rx="22" fill="#0b6e4f"/>
+  <text x="195" y="818" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#ffffff">Loslegen</text>
+</svg>

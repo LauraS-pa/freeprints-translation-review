@@ -1,6 +1,15 @@
-# FreePrints Translation Review — Walkthrough
+# FreePrints Translation Review Ã¢â‚¬â€ Walkthrough
 
 To back up or share this project on GitHub, see [GITHUB.md](GITHUB.md).
+
+## Share this link with Daniela (no localhost needed)
+
+Anyone with this link can open the review site in a normal web browser:
+
+**https://lauras-pa.github.io/freeprints-translation-review/**
+
+You do not need to run `serve.ps1` or open `index.html` on your computer for Daniela to use the site. After you add screenshots or change text on your PC, run `update-screenshots.bat`, then push updates to GitHub (see [GITHUB.md](GITHUB.md)) — the link above will show the latest version within a minute or two.
+
 
 ## Step 1: Open the project folder
 
@@ -17,7 +26,7 @@ You should see folders like `images`, `js`, `css`, and files like `index.html`.
 
    `01-splash-landing.png`
 
-The name must match exactly — the site is already set up to look for that file.
+The name must match exactly Ã¢â‚¬â€ the site is already set up to look for that file.
 
 ## Step 3: Open the site
 
@@ -50,7 +59,7 @@ What do I get for FREE?
 Get started
 ```
 
-4. Turn **Owner mode** off before sharing with Daniela — that hides the English field from her view.
+4. Turn **Owner mode** off before sharing with Daniela Ã¢â‚¬â€ that hides the English field from her view.
 
 ## Step 5: Daniela reviews the page
 
@@ -58,8 +67,8 @@ She looks at the screenshot and answers one question:
 
 **"Is this page correct as shown?"**
 
-- **Yes, correct** → page is marked done
-- **No, needs changes** → she fills in:
+- **Yes, correct** Ã¢â€ â€™ page is marked done
+- **No, needs changes** Ã¢â€ â€™ she fills in:
   - Corrected German translation (for the whole page)
   - Notes (optional)
 
@@ -79,8 +88,8 @@ You do **not** need to edit any code. You only add two plain files in the `image
 
 1. Open the `images` folder in File Explorer.
 2. Find the file `TEMPLATE-new-screenshot.txt`.
-3. Right-click it → **Copy**.
-4. Right-click in empty space → **Paste**.
+3. Right-click it Ã¢â€ â€™ **Copy**.
+4. Right-click in empty space Ã¢â€ â€™ **Paste**.
 5. Rename the copy to match your new screen. Use a number and a short name, for example:
 
    `02-onboarding.txt`
@@ -89,13 +98,13 @@ You do **not** need to edit any code. You only add two plain files in the `image
 
 ### 2. Fill in the description (Notepad)
 
-1. Right-click `02-onboarding.txt` → **Open with** → **Notepad**.
+1. Right-click `02-onboarding.txt` Ã¢â€ â€™ **Open with** Ã¢â€ â€™ **Notepad**.
 2. Change the text to describe your new screen. The **first line** is the title Daniela will see in the tab. Every line after that is German text from the screenshot.
 
 Here is a complete example you can copy and change:
 
 ```
-Onboarding — Welcome screen
+Onboarding Ã¢â‚¬â€ Welcome screen
 
 Headline: WILLKOMMEN BEI FREEPRINTS
 Body text: Drucken Sie Ihre Fotos kostenlos aus.
@@ -103,7 +112,7 @@ Button: Weiter
 ```
 
 3. Change only the parts that apply to **your** screen (title, labels, and German words).
-4. Save the file (**File → Save**) and close Notepad.
+4. Save the file (**File Ã¢â€ â€™ Save**) and close Notepad.
 
 ### 3. Add the screenshot image
 
@@ -116,15 +125,15 @@ Button: Weiter
 
 1. Go back to the main project folder (`freeprints-translation-review`).
 2. Double-click **`update-screenshots.bat`**.
-3. A small window will open and say something like “Updated js/data.js with 2 screenshot(s).” Press any key to close it.
+3. A small window will open and say something like Ã¢â‚¬Å“Updated js/data.js with 2 screenshot(s).Ã¢â‚¬Â Press any key to close it.
 
-   **Tip:** If you start the site with `serve.ps1`, this update runs automatically — you can skip this step.
+   **Tip:** If you start the site with `serve.ps1`, this update runs automatically Ã¢â‚¬â€ you can skip this step.
 
 ### 5. Refresh the site
 
 1. Open the review site in your browser (or switch to the tab if it is already open).
-2. Press **F5** or click the browser’s refresh button.
-3. You should see a **new tab** at the top for your screenshot (e.g. “Onboarding — Welcome screen”).
+2. Press **F5** or click the browserÃ¢â‚¬â„¢s refresh button.
+3. You should see a **new tab** at the top for your screenshot (e.g. Ã¢â‚¬Å“Onboarding Ã¢â‚¬â€ Welcome screenÃ¢â‚¬Â).
 
 **Troubleshooting:** If you do not see the new tab, make sure the image and `.txt` files share the same name (e.g. both `02-onboarding`), you ran `update-screenshots.bat`, and you refreshed the page.
 

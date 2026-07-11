@@ -1,5 +1,25 @@
-﻿# Push this project to GitHub
+# Push this project to GitHub
 
+## Live site (GitHub Pages) â€” share with Daniela
+
+**Share this link:** [https://lauras-pa.github.io/freeprints-translation-review/](https://lauras-pa.github.io/freeprints-translation-review/)
+
+Daniela and anyone else can open that URL in Chrome, Edge, or Safari. No install, no localhost, no Cursor.
+
+After you change files on your computer, upload again so the live site updates:
+
+```powershell
+cd C:\Users\LSmith\freeprints-translation-review
+git add .
+git commit -m "Update screenshots or copy"
+git push
+```
+
+Wait 1â€“2 minutes, then refresh the link above.
+
+Repository on GitHub: [https://github.com/LauraS-pa/freeprints-translation-review](https://github.com/LauraS-pa/freeprints-translation-review)
+
+---
 This guide is for non-developers. You only need Git (already used in this folder) and a free GitHub account.
 
 ---
@@ -10,18 +30,18 @@ Use this to see which step you are on. Re-run the commands in PowerShell if you 
 
 | Check | Result |
 |--------|--------|
-| **Branch** | `master` |
-| **Commits** | None yet (first upload not done) |
-| **Remote (GitHub link)** | Not set up |
+| **Branch** | `main` |
+| **Commits** | Yes â€” project is on GitHub |
+| **Remote (GitHub link)** | `origin` â†’ https://github.com/LauraS-pa/freeprints-translation-review |
 | **Untracked files** | `.gitignore`, `README.md`, `WALKTHROUGH.md`, `css/`, `images/`, `index.html`, `js/`, `package.json`, `serve.ps1`, `update-screenshots.bat`, `update-screenshots.ps1` |
-| **Git Credential Manager** | Installed — easiest login is a browser window on your first `git push` |
+| **Git Credential Manager** | Installed â€” easiest login is a browser window on your first `git push` |
 | **GitHub CLI (`gh`)** | Not installed on this machine (optional; see "Connect your GitHub account" below) |
 
-**What that means:** Git is initialized, but nothing has been committed or sent to GitHub yet. Follow **Part A** below, then **either Part B or Part C**.
+**What that means:** The site is live on GitHub Pages (link at the top). Use **Updating GitHub** below when you change files locally.
 
 ---\r\n\r\n## Connect your GitHub account (login)
 
-You already have a GitHub account. On this Windows PC, **Git** and **Git Credential Manager** are installed. You do **not** need to "log in" inside Cursor separately for pushing code — Git handles that when you run `git push` in PowerShell (or in Cursor's terminal).
+You already have a GitHub account. On this Windows PC, **Git** and **Git Credential Manager** are installed. You do **not** need to "log in" inside Cursor separately for pushing code â€” Git handles that when you run `git push` in PowerShell (or in Cursor's terminal).
 
 ### Easiest way: sign in when you push (recommended)
 
@@ -35,7 +55,7 @@ Do this the first time you send your project to GitHub (after **Part A**, using 
 
 2. Run the `git push` command from Part B or Part C (for example `git push -u origin master`).
 
-3. Watch for a sign-in step — usually one of these:
+3. Watch for a sign-in step â€” usually one of these:
    - A small window titled **Git Credential Manager** asking you to sign in, **or**
    - Your **web browser** opening to a GitHub page.
 
@@ -45,7 +65,7 @@ Do this the first time you send your project to GitHub (after **Part A**, using 
 
 5. When the browser says you can close the tab or return to the app, go back to **PowerShell**. The push should finish on its own.
 
-6. If PowerShell asks **Username for 'https://github.com':**, type your **GitHub username** and press Enter. You usually do **not** need to type your GitHub website password — Credential Manager fills that in after the browser step.
+6. If PowerShell asks **Username for 'https://github.com':**, type your **GitHub username** and press Enter. You usually do **not** need to type your GitHub website password â€” Credential Manager fills that in after the browser step.
 
 7. After this works once, Windows typically **remembers** you. Later pushes often need no browser window.
 
@@ -55,7 +75,7 @@ Do this the first time you send your project to GitHub (after **Part A**, using 
 
 Choose this only if the browser window never appears or login keeps failing.
 
-1. Download **GitHub CLI** for Windows: [https://cli.github.com/](https://cli.github.com/) — run the installer (default options are fine).
+1. Download **GitHub CLI** for Windows: [https://cli.github.com/](https://cli.github.com/) â€” run the installer (default options are fine).
 2. **Close and reopen** PowerShell (and Cursor if you use its built-in terminal).
 3. Run:
 
@@ -75,7 +95,7 @@ Choose this only if the browser window never appears or login keeps failing.
 
 ### If Git still asks for a password (fallback)
 
-GitHub does **not** accept your normal website password for Git over HTTPS anymore. If Credential Manager does not help and Git keeps asking for a **Password**, create a **Personal Access Token** on GitHub (**Settings** → **Developer settings** → **Personal access tokens**), give it **repo** access, and paste the token when Git asks for a password. Treat it like a secret; this is optional if browser login works.
+GitHub does **not** accept your normal website password for Git over HTTPS anymore. If Credential Manager does not help and Git keeps asking for a **Password**, create a **Personal Access Token** on GitHub (**Settings** â†’ **Developer settings** â†’ **Personal access tokens**), give it **repo** access, and paste the token when Git asks for a password. Treat it like a secret; this is optional if browser login works.
 
 ---
 
@@ -91,7 +111,7 @@ GitHub does **not** accept your normal website password for Git over HTTPS anymo
 
 ---
 
-## Part A — Save a first copy on your computer (required once)
+## Part A â€” Save a first copy on your computer (required once)
 
 These commands take a snapshot of the project Git can upload.
 
@@ -109,38 +129,38 @@ To confirm it worked:
 git log -1 --oneline
 ```
 
-You should see one line starting with a short code and “Initial commit…”.
+You should see one line starting with a short code and â€œInitial commitâ€¦â€.
 
 ---
 
-## Part B — New repository on GitHub (you create it on the website)
+## Part B â€” New repository on GitHub (you create it on the website)
 
 Use this when GitHub does **not** already have a repo for this project.
 
 1. In your browser, sign in to GitHub.
-2. Click the **+** (top right) → **New repository**.
+2. Click the **+** (top right) â†’ **New repository**.
 3. **Repository name:** e.g. `freeprints-translation-review` (any name you like).
 4. Leave it **Public** or choose **Private**.
-5. **Important:** Do **not** check “Add a README”, “Add .gitignore”, or “Choose a license” — leave the repo **empty**.
+5. **Important:** Do **not** check â€œAdd a READMEâ€, â€œAdd .gitignoreâ€, or â€œChoose a licenseâ€ â€” leave the repo **empty**.
 6. Click **Create repository**.
-7. On the new page, find **“…or push an existing repository from the command line”** and copy the two lines that look like:
+7. On the new page, find **â€œâ€¦or push an existing repository from the command lineâ€** and copy the two lines that look like:
 
    ```text
    git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
    git push -u origin master
    ```
 
-   Replace with **your** URL if GitHub shows a different one (some accounts use `main` instead of `master` — use the branch name GitHub shows).
+   Replace with **your** URL if GitHub shows a different one (some accounts use `main` instead of `master` â€” use the branch name GitHub shows).
 
 8. In PowerShell (same folder as above), paste and run those commands.
 
 9. If Git asks you to sign in, follow **Connect your GitHub account (login)** above (browser window). Use a Personal Access Token only if that section's fallback steps are needed.
 
-10. Refresh the repo page on GitHub — your files should appear.
+10. Refresh the repo page on GitHub â€” your files should appear.
 
 ---
 
-## Part C — Existing empty repository on GitHub
+## Part C â€” Existing empty repository on GitHub
 
 Use this when someone already created a repo for you and it has **no files** (no README on GitHub).
 
@@ -154,7 +174,7 @@ Use this when someone already created a repo for you and it has **no files** (no
    git push -u origin master
    ```
 
-   If GitHub’s instructions say `main` instead of `master`, use:
+   If GitHubâ€™s instructions say `main` instead of `master`, use:
 
    ```powershell
    git push -u origin master:main
@@ -162,9 +182,9 @@ Use this when someone already created a repo for you and it has **no files** (no
 
    or rename your branch to match what the empty repo expects (GitHub usually shows the exact commands).
 
-4. Sign in if prompted (token as password — see Part B, step 9).
+4. Sign in if prompted (token as password â€” see Part B, step 9).
 
-**If you see “remote origin already exists”:** You already linked a URL. Check it with `git remote -v`. To change it:
+**If you see â€œremote origin already existsâ€:** You already linked a URL. Check it with `git remote -v`. To change it:
 
 ```powershell
 git remote set-url origin PASTE_YOUR_URL_HERE
@@ -198,11 +218,11 @@ git push
 
 ## Optional: GitHub CLI (`gh`)
 
-This computer does not have `gh` installed. You do **not** need it if browser login on `git push` works (see **Connect your GitHub account**). To install later: [https://cli.github.com/](https://cli.github.com/), then `gh auth login` — full steps are in that section.
+This computer does not have `gh` installed. You do **not** need it if browser login on `git push` works (see **Connect your GitHub account**). To install later: [https://cli.github.com/](https://cli.github.com/), then `gh auth login` â€” full steps are in that section.
 
 ---
 
 ## Help
 
 - [GitHub: Adding an existing project](https://docs.github.com/en/get-started/importing-your-projects-to-github/importing-source-code-to-github/adding-locally-hosted-code-to-github)
-- If `git push` fails with “rejected” and mentions unrelated histories, the GitHub repo is **not** empty — ask whoever owns the repo whether to merge or use a fresh empty repo.
+- If `git push` fails with â€œrejectedâ€ and mentions unrelated histories, the GitHub repo is **not** empty â€” ask whoever owns the repo whether to merge or use a fresh empty repo.

@@ -1,11 +1,15 @@
 # Regenerates js/data.js from paired screenshots in the images/ folder.
 #
-# For each screen, use the same base name with:
+# Simple workflow (preferred):
 #   NN-screen-name-de.png   German / DE app screenshot
 #   NN-screen-name-us.png   US / English app screenshot
-#   NN-screen-name.txt      Title + German reference lines
+#   Then double-click update-screenshots.bat
 #
-# Legacy: a bare NN-screen-name.png (no -de/-us) is treated as the German image.
+# Optional:
+#   NN-screen-name.txt      Title + German reference lines
+#   (If missing, the tab title comes from the file name and German text can be empty.)
+#
+# Legacy: a bare NN-screen-name.png (no -de/-us) is still treated as the German image.
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -20,6 +24,19 @@ function Escape-JsString([string]$value) {
   $value = $value.Replace("`n", "\n")
   $value = $value.Replace("`r", "\n")
   return $value
+}
+
+function Format-TitleFromId([string]$id) {
+  $parts = @($id -split "-")
+  if ($parts.Count -gt 1 -and $parts[0] -match '^\d+$') {
+    $parts = $parts[1..($parts.Count - 1)]
+  }
+  $words = foreach ($part in $parts) {
+    if ([string]::IsNullOrEmpty($part)) { continue }
+    $part.Substring(0, 1).ToUpper() + $part.Substring(1)
+  }
+  if ($words.Count -eq 0) { return $id }
+  return ($words -join " ")
 }
 
 function Read-ScreenshotTxt([string]$path) {
@@ -52,7 +69,7 @@ function Read-ScreenshotTxt([string]$path) {
   }
 
   if (-not $titleSet) {
-    $title = [IO.Path]::GetFileNameWithoutExtension($path)
+    $title = Format-TitleFromId ([IO.Path]::GetFileNameWithoutExtension($path))
   }
 
   return @{
@@ -128,18 +145,16 @@ foreach ($id in $pages.Keys) {
     $imageEn = "images/" + $pair.us.Name
   } else {
     $imageEn = "images/placeholder-us.svg"
-    Write-Warning "No US image for $id - add images\$id-us.png (placeholder shown until then)."
+    Write-Host "Note: No US image for $id yet - add images\$id-us.png when ready (placeholder shown until then)."
   }
 
-  $entryTitle = ($id -replace "-", " ")
+  $entryTitle = Format-TitleFromId $id
   $entryGermanTexts = @()
 
   if (Test-Path -LiteralPath $txtPath) {
     $parsed = Read-ScreenshotTxt $txtPath
     $entryTitle = $parsed.title
     $entryGermanTexts = $parsed.germanTexts
-  } else {
-    Write-Warning "No description file for $id - add images\$id.txt (copy images\TEMPLATE-new-screenshot.txt)."
   }
 
   $entries.Add([PSCustomObject]@{
@@ -155,11 +170,12 @@ $sb = New-Object System.Text.StringBuilder
 [void]$sb.AppendLine("/**")
 [void]$sb.AppendLine(" * Screenshot review configuration (auto-generated).")
 [void]$sb.AppendLine(" *")
-[void]$sb.AppendLine(" * To add or change screenshots, edit files in images/ and run:")
-[void]$sb.AppendLine(" *   update-screenshots.bat")
-[void]$sb.AppendLine(" * or start the site with serve.ps1 (updates automatically).")
+[void]$sb.AppendLine(" * To add or change screenshots, put matching -de and -us images")
+[void]$sb.AppendLine(" * in images/ and run: update-screenshots.bat")
+[void]$sb.AppendLine(" * (or start the site with serve.ps1, which updates automatically).")
 [void]$sb.AppendLine(" *")
-[void]$sb.AppendLine(" * Pairing: NN-name-de.png + NN-name-us.png + NN-name.txt")
+[void]$sb.AppendLine(" * Pairing: NN-name-de.png + NN-name-us.png")
+[void]$sb.AppendLine(" * Optional: NN-name.txt for title + German reference lines")
 [void]$sb.AppendLine(" */")
 [void]$sb.AppendLine("")
 [void]$sb.AppendLine("window.SCREENSHOTS = [")
@@ -193,5 +209,6 @@ $utf8NoBom = New-Object System.Text.UTF8Encoding $false
 
 Write-Host ("Updated js/data.js with {0} screenshot pair(s)." -f $entries.Count)
 if ($entries.Count -eq 0) {
-  Write-Host "Add paired PNGs (NN-name-de.png + NN-name-us.png) and NN-name.txt in images/, then run again."
+  Write-Host "Add paired images in images/ (example: 03-checkout-de.png + 03-checkout-us.png), then run again."
+  Write-Host "A matching .txt description file is optional."
 }

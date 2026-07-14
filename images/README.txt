@@ -1,38 +1,33 @@
-# Screenshot images and descriptions go in this folder.
+# How to add a new screenshot (simple)
 
-## Naming (paired US + German)
+You only need two images with matching names. Put both in this folder.
 
-For each app page, use the same base name with three files:
+1. Save the German app screenshot as:   03-checkout-de.png
+2. Save the US app screenshot as:       03-checkout-us.png
+   (Same name except the end: -de vs -us. PNG, JPG, or WebP is fine.)
+3. Double-click update-screenshots.bat in the main project folder.
+4. Refresh the review site (or push to GitHub so the live link updates).
 
-1. German screenshot:  `01-splash-landing-de.png`
-2. US screenshot:      `01-splash-landing-us.png`
-3. Description:        `01-splash-landing.txt`
+That is enough. A new tab appears for the screen pair.
 
-Supported image formats: PNG, JPG, JPEG, WebP.
+## Optional: description file
 
-Until a US or German image exists, the site shows a labeled placeholder
-(`placeholder-us.svg` or `placeholder-de.svg`).
+If you want a nicer tab title and German text lines on the right side,
+copy TEMPLATE-new-screenshot.txt, rename it to match (e.g. 03-checkout.txt),
+and fill it in with Notepad. Without a .txt, the tab title comes from the
+image name and German reference text stays empty until you add one.
+
+## Naming examples
+
+  01-splash-landing-de.png
+  01-splash-landing-us.png
+  01-splash-landing.txt          ← optional
+
+Until a US or German image exists, the site shows a labeled placeholder.
 
 ## Legacy names
 
-A single image named `01-splash-landing.png` (no -de/-us) is still treated
-as the German screenshot. Prefer renaming to `01-splash-landing-de.png`
-when you can.
+A single image named 01-splash-landing.png (no -de/-us) is still treated
+as the German screenshot. Prefer -de / -us names going forward.
 
-## First screenshot (already set up)
-
-- Description: 01-splash-landing.txt
-- German image: 01-splash-landing.png (or rename to 01-splash-landing-de.png)
-- US image: add 01-splash-landing-us.png
-
-## Add another screenshot
-
-1. Copy TEMPLATE-new-screenshot.txt and rename it (e.g. 02-onboarding.txt).
-2. Open the copy in Notepad, change the title and German lines.
-3. Save both screenshots with matching names:
-   - 02-onboarding-de.png  (German app)
-   - 02-onboarding-us.png  (US / English app)
-4. Double-click update-screenshots.bat in the main project folder.
-5. Refresh the review site in your browser.
-
-See WALKTHROUGH.md for step-by-step instructions.
+See WALKTHROUGH.md for full steps.

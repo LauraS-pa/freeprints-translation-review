@@ -38,17 +38,16 @@ Progress and answers persist automatically in the browser.
 
 ## Add screenshot pairs (no code editing)
 
-For each app page, put three files in `images/` with the same base name:
-
-1. German screenshot: `02-onboarding-de.png`
-2. US screenshot: `02-onboarding-us.png`
-3. Description (title + German lines): `02-onboarding.txt` (copy `TEMPLATE-new-screenshot.txt`)
-
-Then double-click **`update-screenshots.bat`** (or start with `serve.ps1`, which runs the update automatically). Refresh the browser.
+1. Put both images in `images/` with matching names ending in `-de` and `-us`:
+   - `03-checkout-de.png` (German)
+   - `03-checkout-us.png` (US)
+2. *(Optional)* Add `03-checkout.txt` for a nicer title and German reference lines.
+3. Double-click **`update-screenshots.bat`** (or start with `serve.ps1`, which updates automatically).
+4. Refresh the browser (or push to GitHub for the live site).
 
 If a US or German image is missing, a labeled placeholder is shown until you drop the file in.
 
-**Legacy:** a bare `01-splash-landing.png` (no `-de`/`-us`) is still treated as the German image. Prefer renaming to `01-splash-landing-de.png` when convenient.
+**Legacy:** a bare `01-splash-landing.png` (no `-de`/`-us`) is still treated as the German image.
 
 See [WALKTHROUGH.md](WALKTHROUGH.md) for non-developer steps.
 
@@ -62,7 +61,7 @@ freeprints-translation-review/
 │   ├── app.js              # UI and interactions
 │   ├── data.js             # Auto-generated screenshot list (do not edit by hand)
 │   └── storage.js          # localStorage helpers
-├── images/                 # Paired screenshots + .txt descriptions
+├── images/                 # Paired -de/-us screenshots (+ optional .txt)
 ├── update-screenshots.bat  # Double-click after adding screenshots
 ├── update-screenshots.ps1  # Used by the .bat file and serve.ps1
 └── README.md

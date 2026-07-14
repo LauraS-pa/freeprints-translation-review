@@ -3,7 +3,8 @@ YOUR SCREEN TITLE HERE
 Short label: German text exactly as it appears on screen
 Another label: More German text from the screenshot
 
-# After saving this .txt file, add the pair of images with the SAME base name:
+# OPTIONAL file — you can skip this .txt entirely.
+# Minimum needed: matching image pair in this folder, for example:
 #   NN-your-name-de.png   (German app screenshot)
 #   NN-your-name-us.png   (US / English app screenshot)
 # Then double-click update-screenshots.bat in the project folder.

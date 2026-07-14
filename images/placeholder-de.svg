@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" role="img" aria-label="German screenshot placeholder">
+  <defs>
+    <linearGradient id="bgDe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3f4f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="390" height="844" fill="url(#bgDe)"/>
+  <rect x="24" y="72" width="342" height="420" rx="12" fill="#e5e7eb"/>
+  <text x="195" y="300" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1a2332">German screenshot</text>
+  <text x="195" y="330" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#5c6b7a">Add the matching German app image</text>
+  <text x="195" y="560" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#5c6b7a">Expected filename</text>
+  <text x="195" y="588" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#8a97a6">images/NN-screen-name-de.png</text>
+  <text x="195" y="640" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#8a97a6">Example: 01-splash-landing-de.png</text>
+</svg>

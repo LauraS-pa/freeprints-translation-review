@@ -1,5 +1,11 @@
-# Regenerates js/data.js from images in the images/ folder.
-# Pair each screenshot image with a matching .txt file (same name, .txt extension).
+# Regenerates js/data.js from paired screenshots in the images/ folder.
+#
+# For each screen, use the same base name with:
+#   NN-screen-name-de.png   German / DE app screenshot
+#   NN-screen-name-us.png   US / English app screenshot
+#   NN-screen-name.txt      Title + German reference lines
+#
+# Legacy: a bare NN-screen-name.png (no -de/-us) is treated as the German image.
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -17,7 +23,7 @@ function Escape-JsString([string]$value) {
 }
 
 function Read-ScreenshotTxt([string]$path) {
-  $lines = Get-Content -Path $path -Encoding UTF8
+  $lines = [System.IO.File]::ReadAllLines($path, [System.Text.UTF8Encoding]::new($false))
   $title = ""
   $germanTexts = New-Object System.Collections.Generic.List[object]
   $titleSet = $false
@@ -55,33 +61,74 @@ function Read-ScreenshotTxt([string]$path) {
   }
 }
 
+function Get-BaseId([string]$baseName) {
+  if ($baseName -match '^(.*)-(de|us)$') {
+    return $Matches[1]
+  }
+  return $baseName
+}
+
 $imageExtensions = @(".png", ".jpg", ".jpeg", ".webp")
-$ids = New-Object 'System.Collections.Generic.SortedDictionary[string, object]'
+$skipImageNames = @("placeholder", "placeholder-de", "placeholder-us")
+
+# baseId -> @{ de = FileInfo|null; us = FileInfo|null }
+$pages = New-Object 'System.Collections.Generic.SortedDictionary[string, object]'
+
+function Ensure-Page([string]$id) {
+  if (-not $pages.ContainsKey($id)) {
+    $pages[$id] = @{ de = $null; us = $null }
+  }
+}
 
 foreach ($file in Get-ChildItem -Path $imagesDir -File) {
-  if ($imageExtensions -contains $file.Extension.ToLower() -and $file.Name -notlike "TEMPLATE*") {
-    $ids[$file.BaseName] = $file
+  $ext = $file.Extension.ToLower()
+  if ($imageExtensions -notcontains $ext) { continue }
+  if ($file.Name -like "TEMPLATE*") { continue }
+  if ($skipImageNames -contains $file.BaseName.ToLower()) { continue }
+
+  $baseName = $file.BaseName
+  if ($baseName -match '^(.*)-de$') {
+    $id = $Matches[1]
+    Ensure-Page $id
+    $pages[$id].de = $file
+  } elseif ($baseName -match '^(.*)-us$') {
+    $id = $Matches[1]
+    Ensure-Page $id
+    $pages[$id].us = $file
+  } else {
+    # Legacy bare name = German image
+    $id = $baseName
+    Ensure-Page $id
+    if ($null -eq $pages[$id].de) {
+      $pages[$id].de = $file
+    }
   }
 }
 
 foreach ($file in Get-ChildItem -Path $imagesDir -File -Filter "*.txt") {
   if ($file.Name -like "README*" -or $file.Name -like "TEMPLATE*") { continue }
-  if (-not $ids.ContainsKey($file.BaseName)) {
-    $ids[$file.BaseName] = $null
-  }
+  $id = Get-BaseId $file.BaseName
+  Ensure-Page $id
 }
 
 $entries = New-Object System.Collections.Generic.List[object]
 
-foreach ($id in $ids.Keys) {
-  $imageFile = $ids[$id]
+foreach ($id in $pages.Keys) {
+  $pair = $pages[$id]
   $txtPath = Join-Path $imagesDir ($id + ".txt")
 
-  if ($null -ne $imageFile) {
-    $imagePath = "images/" + $imageFile.Name
+  if ($null -ne $pair.de) {
+    $imageDe = "images/" + $pair.de.Name
   } else {
-    $imagePath = "images/" + $id + ".png"
-    Write-Warning "No image for $id - add images\$id.png (a placeholder will show until then)."
+    $imageDe = "images/placeholder-de.svg"
+    Write-Warning "No German image for $id - add images\$id-de.png (placeholder shown until then)."
+  }
+
+  if ($null -ne $pair.us) {
+    $imageEn = "images/" + $pair.us.Name
+  } else {
+    $imageEn = "images/placeholder-us.svg"
+    Write-Warning "No US image for $id - add images\$id-us.png (placeholder shown until then)."
   }
 
   $entryTitle = ($id -replace "-", " ")
@@ -98,7 +145,8 @@ foreach ($id in $ids.Keys) {
   $entries.Add([PSCustomObject]@{
     id = $id
     title = $entryTitle
-    image = $imagePath
+    imageDe = $imageDe
+    imageEn = $imageEn
     germanTexts = $entryGermanTexts
   })
 }
@@ -110,6 +158,8 @@ $sb = New-Object System.Text.StringBuilder
 [void]$sb.AppendLine(" * To add or change screenshots, edit files in images/ and run:")
 [void]$sb.AppendLine(" *   update-screenshots.bat")
 [void]$sb.AppendLine(" * or start the site with serve.ps1 (updates automatically).")
+[void]$sb.AppendLine(" *")
+[void]$sb.AppendLine(" * Pairing: NN-name-de.png + NN-name-us.png + NN-name.txt")
 [void]$sb.AppendLine(" */")
 [void]$sb.AppendLine("")
 [void]$sb.AppendLine("window.SCREENSHOTS = [")
@@ -119,8 +169,8 @@ for ($i = 0; $i -lt $entries.Count; $i++) {
   [void]$sb.AppendLine("  {")
   [void]$sb.AppendLine(('    id: "{0}",' -f $entry.id))
   [void]$sb.AppendLine(('    title: "{0}",' -f (Escape-JsString $entry.title)))
-  [void]$sb.AppendLine(('    image: "{0}",' -f $entry.image))
-  [void]$sb.AppendLine('    originalEnglish: "",')
+  [void]$sb.AppendLine(('    imageEn: "{0}",' -f $entry.imageEn))
+  [void]$sb.AppendLine(('    imageDe: "{0}",' -f $entry.imageDe))
   [void]$sb.AppendLine("    germanTexts: [")
 
   foreach ($text in $entry.germanTexts) {
@@ -141,7 +191,7 @@ for ($i = 0; $i -lt $entries.Count; $i++) {
 $utf8NoBom = New-Object System.Text.UTF8Encoding $false
 [IO.File]::WriteAllText($dataFile, $sb.ToString(), $utf8NoBom)
 
-Write-Host ("Updated js/data.js with {0} screenshot(s)." -f $entries.Count)
+Write-Host ("Updated js/data.js with {0} screenshot pair(s)." -f $entries.Count)
 if ($entries.Count -eq 0) {
-  Write-Host "Add a PNG or JPG to images/ plus a matching .txt file, then run this script again."
+  Write-Host "Add paired PNGs (NN-name-de.png + NN-name-us.png) and NN-name.txt in images/, then run again."
 }

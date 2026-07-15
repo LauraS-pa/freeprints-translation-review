@@ -141,6 +141,10 @@ main {
   align-items: start;
 }
 
+.review-layout--single-shot {
+  grid-template-columns: minmax(380px, 1.35fr) minmax(280px, 0.65fr);
+}
+
 @media (max-width: 1100px) {
   .review-layout {
     grid-template-columns: 1fr;
@@ -169,6 +173,21 @@ main {
   grid-template-columns: 1fr 1fr;
   gap: 0.85rem;
   align-items: start;
+}
+
+.screens-compare--de-only,
+.screens-compare--en-only {
+  grid-template-columns: 1fr;
+}
+
+.screens-compare--de-only .phone-card--placeholder,
+.screens-compare--en-only .phone-card--placeholder {
+  display: none;
+}
+
+.screens-compare--de-only .screenshot-frame,
+.screens-compare--en-only .screenshot-frame {
+  margin: 0 auto;
 }
 
 @media (max-width: 640px) {
@@ -201,11 +220,39 @@ main {
 
 .screenshot-frame img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  margin: 0 auto;
   border-radius: 16px;
   background: #fff;
   user-select: none;
+}
+
+.screenshot-frame img.is-zoomable {
+  cursor: zoom-in;
+}
+
+.screenshot-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(17, 24, 39, 0.9);
+  cursor: zoom-out;
+}
+
+.screenshot-zoom-overlay img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(1270px, 100%);
+  max-height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
 }
 
 .screenshot-caption {

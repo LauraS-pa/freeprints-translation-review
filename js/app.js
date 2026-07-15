@@ -53,6 +53,23 @@
     );
   }
 
+  function isPlaceholder(src) {
+    return /placeholder/i.test(src);
+  }
+
+  function hasRealImage(screenshot, locale) {
+    return !isPlaceholder(imageSrc(screenshot, locale));
+  }
+
+  function compareLayoutClass(screenshot) {
+    const showEn = hasRealImage(screenshot, "en");
+    const showDe = hasRealImage(screenshot, "de");
+    if (showEn && showDe) return "";
+    if (showDe && !showEn) return "screens-compare--de-only";
+    if (showEn && !showDe) return "screens-compare--en-only";
+    return "";
+  }
+
   async function copyText(text) {
     const value = String(text ?? "");
     if (!value) return false;
@@ -119,6 +136,7 @@
     const isUs = locale === "en";
     const label = isUs ? "English / US" : "German";
     const src = imageSrc(screenshot, locale);
+    const placeholder = isPlaceholder(src);
     const fallback = isUs
       ? "images/placeholder-us.svg"
       : "images/placeholder-de.svg";
@@ -127,13 +145,15 @@
       : `${screenshot.title} — German app screenshot`;
 
     return `
-      <figure class="phone-card">
+      <figure class="phone-card${placeholder ? " phone-card--placeholder" : ""}">
         <figcaption class="phone-label">${label}</figcaption>
         <div class="screenshot-frame">
           <img
             src="${escapeAttr(src)}"
             alt="${escapeAttr(alt)}"
-            onerror="this.onerror=null; this.src='${fallback}'; this.alt='${isUs ? "US screenshot placeholder" : "German screenshot placeholder"}';"
+            decoding="async"
+            ${placeholder ? 'data-placeholder="true"' : 'class="is-zoomable" title="Click to view full size"'}
+            onerror="this.onerror=null; this.src='${fallback}'; this.alt='${isUs ? "US screenshot placeholder" : "German screenshot placeholder"}'; this.dataset.placeholder='true'; this.classList.remove('is-zoomable'); this.removeAttribute('title');"
           />
         </div>
       </figure>
@@ -206,11 +226,13 @@
         : review.status === "needs-changes"
           ? "needs-changes"
           : "";
+    const compareClass = compareLayoutClass(screenshot);
+    const layoutClass = compareClass ? "review-layout--single-shot" : "";
 
     appEl.innerHTML = `
-      <div class="review-layout">
+      <div class="review-layout ${layoutClass}">
         <aside class="panel screenshot-panel">
-          <div class="screens-compare">
+          <div class="screens-compare ${compareClass}">
             ${renderPhoneFrame(screenshot, "en")}
             ${renderPhoneFrame(screenshot, "de")}
           </div>
@@ -291,6 +313,32 @@
     `;
 
     bindPageEvents(screenshot);
+    bindScreenshotZoom();
+  }
+
+  function bindScreenshotZoom() {
+    appEl.querySelectorAll(".screenshot-frame img.is-zoomable").forEach((img) => {
+      img.addEventListener("click", () => {
+        const overlay = document.createElement("div");
+        overlay.className = "screenshot-zoom-overlay";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-label", "Full-size screenshot");
+        const full = document.createElement("img");
+        full.src = img.currentSrc || img.src;
+        full.alt = img.alt;
+        overlay.appendChild(full);
+        const close = () => overlay.remove();
+        overlay.addEventListener("click", close);
+        document.addEventListener(
+          "keydown",
+          (event) => {
+            if (event.key === "Escape") close();
+          },
+          { once: true }
+        );
+        document.body.appendChild(overlay);
+      });
+    });
   }
 
   function bindPageEvents(screenshot) {

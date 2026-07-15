@@ -1,0 +1,6 @@
+Pricing Table
+
+Modal title: Einfach gratis Fotoabzüge.
+Table 1 heading: Tabelle 1: Preise für weitere Fotoabzüge
+Table 2 heading: Tabelle 2: Versandkosten
+Table 3 heading: Tabelle 3: Meine Deals-Versandkosten

@@ -11,23 +11,15 @@
 
 window.SCREENSHOTS = [
   {
-    id: "01-splash-landing",
-    title: "Splash / Landing Screen",
+    id: "01-pricing-table",
+    title: "Pricing Table",
     imageEn: "images/placeholder-us.svg",
-    imageDe: "images/01-splash-landing-de.png",
+    imageDe: "images/01-pricing-table-de.png",
     germanTexts: [
-      { label: "Main title", german: "IHR SCHÖNSTES LÄCHELN" },
-      { label: "Body text", german: "Verewigen Sie Ihre Lieblingsfotos auf KOSTENLOSEN 10x15-Abzügen höchster Qualität und lassen Sie sich diese innerhalb weniger Tage zum Versandkostenpreis direkt nach Hause liefern." },
-      { label: "Link", german: "Was erhalte ich GRATIS?" },
-      { label: "CTA button", german: "Loslegen" },
-    ],
-  },
-  {
-    id: "02-homescreen",
-    title: "Homescreen",
-    imageEn: "images/placeholder-us.svg",
-    imageDe: "images/02-homescreen-de.png",
-    germanTexts: [
+      { label: "Modal title", german: "Einfach gratis Fotoabzüge." },
+      { label: "Table 1 heading", german: "Tabelle 1: Preise für weitere Fotoabzüge" },
+      { label: "Table 2 heading", german: "Tabelle 2: Versandkosten" },
+      { label: "Table 3 heading", german: "Tabelle 3: Meine Deals-Versandkosten" },
     ],
   }
 ];

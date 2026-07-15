@@ -21,6 +21,38 @@ window.SCREENSHOTS = [
       { label: "Table 2 heading", german: "Tabelle 2: Versandkosten" },
       { label: "Table 3 heading", german: "Tabelle 3: Meine Deals-Versandkosten" },
     ],
+  },
+  {
+    id: "02-first-launch-mcspace",
+    title: "First Launch Mcspace",
+    imageEn: "images/02-first-launch-mcspace-us.png",
+    imageDe: "images/02-first-launch-mcspace-de.png",
+    germanTexts: [
+    ],
+  },
+  {
+    id: "03-payment",
+    title: "Payment",
+    imageEn: "images/03-payment-us.png",
+    imageDe: "images/03-payment-de.png",
+    germanTexts: [
+    ],
+  },
+  {
+    id: "04-order-summary",
+    title: "Order Summary",
+    imageEn: "images/04-order-summary-us.png",
+    imageDe: "images/04-order-summary-de.png",
+    germanTexts: [
+    ],
+  },
+  {
+    id: "05-pbpcu",
+    title: "Pbpcu",
+    imageEn: "images/05-pbpcu-us.png",
+    imageDe: "images/05-pbpcu-de.png",
+    germanTexts: [
+    ],
   }
 ];
 
